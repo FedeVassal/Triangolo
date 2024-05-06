@@ -26,7 +26,7 @@ Isoscele::Isoscele(float h, float b) {
 
 	cout << "Isoscele - constructor" << endl;
 
-	if (h <= 0. || l <= 0.) {
+	if (h <= 0. || b <= 0.) {
 		WarningMessage("constructor: height and base should be > 0"); 
 		SetDim(0,0);
 	}
