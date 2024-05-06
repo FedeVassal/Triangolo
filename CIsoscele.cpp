@@ -19,19 +19,19 @@ Isoscele::Isoscele() {
 
 /// @brief constructor 
 /// @param h height of the rectangle
-/// @param l lenght of the two equal sides
-Isoscele::Isoscele(float h, float l) {
+/// @param b lenght of the base
+Isoscele::Isoscele(float h, float b) {
 
 	Init();
 
 	cout << "Isoscele - constructor" << endl;
 
 	if (h <= 0. || l <= 0.) {
-		WarningMessage("constructor: diagonals should be > 0"); 
+		WarningMessage("constructor: height and base should be > 0"); 
 		SetDim(0,0);
 	}
 	else
-		SetDim(h,l);
+		SetDim(h,b);
 
 }
 
@@ -68,10 +68,10 @@ Isoscele& Isoscele::operator=(const Isoscele &r) {
 
 /// @brief overload of operator == 
 /// @param r reference to the object on the right side of the operator 
-/// @return true if the two objects have the same width and the same length  
-bool Rhombus::operator==(const Rhombus &r) { 
+/// @return true if the two objects have the same height and the same base
+bool Isoscele::operator==(const Isoscele &r) { 
 
-	if (r.diagL == diagL && r.diagS == diagS)
+	if (r.h == h && r.b == b)
 		return true;
 		
 	return false;
@@ -92,7 +92,7 @@ void Rhombus::Init(const Rhombus &r) {
 }
 
 /// @brief total reset of the object  
-void Rhombus::Reset() {
+void Isoscele::Reset() {
 	
 	SetDim(0,0);
 	
@@ -100,123 +100,119 @@ void Rhombus::Reset() {
 
 
 /// @brief set longer diagonal of the object
-/// @param d diagonal 
-void Rhombus::SetDiagL(float d) {
+/// @param h heihght 
+void Isoscele::Seth(float h) {
 
-	if (d < 0.) {
-		WarningMessage("SetDiagL: diagonal should be > 0");
+	if (h < 0.) {
+		WarningMessage("Seth: height should be > 0");
 		return;
 	}
 
-	SetDim(d,diagS);
+	SetDim(h,b);
 
 } 
 
 /// @brief set shorter diagonal of the object
 /// @param d diagonal 
-void Rhombus::SetDiagS(float d) {
+void Rhombus::Setb(float b) {
 
-	if (d < 0.) {
-		WarningMessage("SetDiagS: diagonal should be > 0");
+	if (b < 0.) {
+		WarningMessage("Setb: base should be > 0");
 		return;
 	}
 
-	SetDim(diagL,d);
+	SetDim(h,b);
 
 }
 
 
-/// @brief get longer diagonal of the object
-/// @return longer diagonal 
-float Rhombus::GetDiagL() {
+/// @brief get longer height of the object
+/// @return longer height
+float Isoscele::Geth() {
 
-	return diagL;
+	return h;
 
 }
 
 /// @brief get shorter diagonal of the object
 /// @return shorter diagonal 
-float Rhombus::GetDiagS() {
+float Isoscele::Getb() {
 
-	return diagS;
+	return b;
 
 }
 
-/// @brief get side of the object
+/// @brief get the two equal sides of the Triangolo Isoscele
 /// @return side 
-float Rhombus::GetSide() {
+float Isoscele::GetEqualSides() {
 
-	return sqrt(diagL*diagL/4. + diagS*diagS/4.);
+	return sqrt(b*b/4. + h*h);
 
 }
 
 
 
-/// @brief set the diagonals of the object
-/// @param dL longer diagonal  
-/// @param dS shorter diagonal
-void Rhombus::SetDim(float dL, float dS) {
+/// @brief set the height and base of the object
+void Isoscele::SetDim(float height, float base) {
 
 	float side = 0;
 	
-	diagL = dL;
-	diagS = dS;  
+	h = height;
+	b = base;  
 	
 	side = GetSide();
-	Quadrilateral::SetSides(side,side,side,side);
+	Triangolo::SetSides(side,side,side);
 	
 	return;
 }
 
-/// @brief get the diagonals of the object
-/// @param dL larger diagonal 
-/// @param dS shorter diagonal
-void Rhombus::GetDim(float &dL, float &dS) {
+/// @brief set the height and base of the object
+void Isoscele::GetDim(float &height, float &base) {
 
-	dL = diagL;
-	dS = diagS; 
+	height = h;
+	base = b; 
 	
 	return;
 }
 
 /// @brief computes the area of the object
 /// @return the area 
-float Rhombus::GetArea() {
+float Isoscele::GetArea() {
 	
-	return (diagL*diagS/2.);
+	return (height*base/2.);
 }
 
 
 /// @brief write an error message 
 /// @param string message to be printed
-void Rhombus::ErrorMessage(const char *string) {
+void Isoscele::ErrorMessage(const char *string) {
 	
-	cout << endl << "ERROR -- Rhombus --";
+	cout << endl << "ERROR -- Isoscele --";
 	cout << string << endl;
 
 }
 
 /// @brief write a warning message 
 /// @param string message to be printed
-void Rhombus::WarningMessage(const char *string) {
+void Isoscele::WarningMessage(const char *string) {
 	
-	cout << endl << "WARNING -- Rhombus --";
+	cout << endl << "WARNING -- Isoscele --";
 	cout << string << endl;
 
 }
 
 
 /// @brief for debugging: all about the object
-void Rhombus::Dump() {
+void Isoscele::Dump() {
 	cout << endl;
-	cout << "---Rhombus---" << endl; 
+	cout << "---Isoscele---" << endl; 
 	cout << endl;
 	
-	cout << "Longer diagonal = " << diagL << endl;
-	cout << "Shorter diagonal = " << diagS << endl; 
+	cout << "Height = " << h << endl;
+	cout << "Base = " << b << endl; 
 	cout << "Side = " << GetSide() << endl;
 	
-	Quadrilateral::Dump();
+	Isoscele::Dump();
 	
 	cout << endl;
 
